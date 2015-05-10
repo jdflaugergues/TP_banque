@@ -1,9 +1,13 @@
-## TP 08 - Tableaux
+## TP 09 - L'héritage
 
-On va compléter classe Compte qui va désormais gérer l’historique des opérations effectuées (relevé de Compte).A chaque fois que l’on crédite ou que l’on débite un Compte on va mémoriser l’opération effectuée. Une opération possède un type (crédit ou débit), un montant et une date. Le compte va stocker les dix dernières opérations. La méthode getHistorique consiste à renvoyer les dernières opérations effectuées ( 10 maximum) sous la forme d’une chaine.         
+Concernant le sujet du TP, celui-ci étant assez vague, j'ai mis en place les règles de gestion qui me parraissaient les plus pertinentes.
 
-1. Réaliser la classe Opération  
-2. Compléter la classe Compte en intégrant la gestion de l’historique. 
-3. Réaliser une petite application permettant de valider le bon fonctionnement de vos classes.  
 
-Le type de l’opération sera défini sous forme d’un type énuméré. 
+
+Je suis donc parti de la [définition de wikipedia concernant un compte Epargne](http://fr.wikipedia.org/wiki/Compte_d%27%C3%A9pargne).
+J'ai divisé l'année en 24 quinzaine. Pour chaque quinzaine du mois (du 1 au 15 et du 16 au 28/29/30/31) le calcul de l'intérêt correspond au solde le plus bas de cette période multiplié par le taux d'intérêt et divisé par le nombre de quinzaine dans l'année (soit 24).
+
+Le calcul se fait donc à chaque débit (et crédit dans le cas ou il n'y a pas de débit dans la quinzaine) et la valeur de l'intérêt calculée est stockée dans un tableau de taille 24 (correspondant au quinzaines de l'année) .
+
+Ci-dessous le diagramme de classe concernant la classe CompteEpargne héritant de la classe Compte : 
+![alt tag](https://raw.githubusercontent.com/jdflaugergues/TP_banque/master/img/DiagrammeClasse.jpg)

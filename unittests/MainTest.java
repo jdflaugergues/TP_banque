@@ -1,19 +1,20 @@
 import fr.cnam.Compte.Compte;
+import fr.cnam.Compte.CompteEpargne;
 import fr.cnam.Compte.Operation;
 import fr.cnam.Compte.TypeOperation;
 import fr.cnam.Personne.Personne;
 
+import java.util.Calendar;
+
 /**
  * Classe de test d'un compte en banque et d'une Opération
  * @author Jonathan de Flaugergues
- * @version 4.0
+ * @version 5.0
  */
 public class MainTest extends junit.framework.TestCase{
 
     private Personne johnDoe;
-    private Operation debit;
-    private Operation credit;
-    private Compte compteDoe;
+    private CompteEpargne compteDoe;
 
     public MainTest(String testMethodName){
         super(testMethodName);
@@ -22,9 +23,7 @@ public class MainTest extends junit.framework.TestCase{
     public void setUp() throws Exception{
         super.setUp();
         johnDoe = new Personne("DOE","John","john@doe.com","28/04/1985");
-        compteDoe = new Compte(johnDoe,"0001",1000);
-        debit = new Operation(TypeOperation.DEBIT,500f);
-        credit = new Operation(TypeOperation.CREDIT,200f);
+        compteDoe = new CompteEpargne(johnDoe,"0001",1000,1.5f/100);
     }
 
     public void tearDown() throws Exception{
@@ -34,41 +33,43 @@ public class MainTest extends junit.framework.TestCase{
     }
 
     /**
-     * Test Unitaire de la classe Operation
+     * Test Unitaire de la classe CompteEpargne
      */
-    public void testOperation(){
-        assertNotNull("L'instance est créée", debit);
-        assertNotNull("L'instance est créée", credit);
+    public void testCompteEpargne(){
+        assertEquals("Taux initial du compte epargne",0.015f,compteDoe.getTauxInterets());
 
-        assertEquals("Opération débit", TypeOperation.DEBIT, debit.getType());
-        assertEquals("Opération crédit", TypeOperation.CREDIT, credit.getType());
-        assertEquals("Opération débit montant", 500f, debit.getMontant());
-        assertEquals("Opération crédit montant",200f,credit.getMontant());
-
+        assertEquals("Interet de la quinzaine courante",0.625f,compteDoe.getInterets()[getIndexFortNight()]);
     }
 
     /**
-     * Test Unitaire de la méthode getHistorique de la classe Compte.
-     * On fait un sleep après chaque seconde car sinon des opérations peuvent être traité en
-     * même temps et du coup fausser les tests.
+     * Test Unitaire du calcul des interets d'une quinzaine.
      */
-    public void testGetHistorique() throws InterruptedException {
+    public void testInteret(){
 
-        compteDoe.crediter(10);Thread.sleep(100);
-        compteDoe.crediter(20);Thread.sleep(100);
-        compteDoe.crediter(30);Thread.sleep(100);
-        compteDoe.crediter(40);Thread.sleep(100);
-        compteDoe.crediter(50);Thread.sleep(100);
-        compteDoe.debiter(1);Thread.sleep(100);
-        compteDoe.debiter(2);Thread.sleep(100);
-        compteDoe.debiter(3);Thread.sleep(100);
-        compteDoe.debiter(4);Thread.sleep(100);
-        compteDoe.debiter(5);Thread.sleep(100);
-        compteDoe.debiter(6);Thread.sleep(100);
-        compteDoe.crediter(500);Thread.sleep(100);
+        compteDoe.crediter(500);
+        assertEquals("Les intérêts de la quinzaine courante n'ont pas augmenté", 0.625f, compteDoe.getInterets()[getIndexFortNight()]);
 
-        // On vérifie dans la console que les 2 opérations les plus anciennes ne sont plus présente dans l'historique
-        System.out.println(compteDoe.getHistorique());
+        compteDoe.debiter(1000);
+        assertEquals("Les intérêts de la quinzaine courante ont diminué", 0.3125f, compteDoe.getInterets()[getIndexFortNight()]);
+
+        compteDoe.debiter(10000);
+        assertEquals("Si le débit n'est pas autorisé, le nouveau taux d'intérêt ne doit pas être calculé", 0.3125f, compteDoe.getInterets()[getIndexFortNight()]);
+
+        compteDoe.debiter(600);
+        assertEquals("Les intérêts d'un solde négatif doivent être null",0f,compteDoe.getInterets()[getIndexFortNight()]);
+
+        System.out.println(compteDoe);
     }
 
+    /**
+     * Récupère l'index dans le tableau d'intérêt correspondant à la quinzaine en cours.
+     * @return L'index de la quinzaine en cours
+     */
+    private int getIndexFortNight(){
+        Calendar today = Calendar.getInstance();
+        int fortnight = (today.get(Calendar.MONTH)) * 2;
+        fortnight += (today.get(Calendar.DAY_OF_MONTH) < 16 ) ? 1 : 2;
+
+        return fortnight-1;
+    }
 }

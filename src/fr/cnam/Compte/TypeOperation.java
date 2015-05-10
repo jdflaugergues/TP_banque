@@ -4,7 +4,7 @@ package fr.cnam.Compte;
  * Enumérateur de type d'opération bancaire.
  *
  * @author Jonathan de Flaugergues
- * @version 4.0
+ * @version 5.0
  */
 public enum TypeOperation {
     CREDIT ("Crédit"),

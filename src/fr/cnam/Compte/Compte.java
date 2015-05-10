@@ -1,17 +1,16 @@
 package fr.cnam.Compte;
 
-import fr.cnam.Journal.*;
+import fr.cnam.Journal.Journal;
 import fr.cnam.Personne.Personne;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Date;
 
 /**
  * Classe d'un compte en banque permettant d'effectuer un virement sur un autre compte,
  * un crédit ou un débit.
  * @author Jonathan de Flaugergues
- * @version 4.0
+ * @version 5.0
  */
 public class Compte {
 
@@ -37,7 +36,7 @@ public class Compte {
      */
     public Compte(Personne proprietaire, String numero, int montantDecouvert){
         this.numero = numero;
-        this.solde = 0;
+        this.solde = 1000;
         this.montantDecouvert = montantDecouvert;
         this.proprietaire = proprietaire;
         this.journal = Journal.getInstance();

@@ -10,7 +10,7 @@ import java.util.Locale;
  * un montant ainsi qu'une date.
  *
  * @author Jonathan de Flaugergues
- * @version 4.0
+ * @version 5.0
  */
 public class Operation {
 

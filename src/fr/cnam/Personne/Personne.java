@@ -10,7 +10,7 @@ import java.util.Locale;
 /**
  * Classe d'une personne étant propriétaire d'une compte et étant marié.
  * @author Jonathan de Flaugergues
- * @version 4.0
+ * @version 5.0
  */
 public class Personne {
 

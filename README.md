@@ -1,15 +1,17 @@
-## TP 06 - Package
+## TP 07 - Association
 
-1. Réaliser un package qui contiendra la classe Compte. Utiliser la classe Compte depuis votre application (classe qui contient le main devra être dans un autre package). 
+On va compléter la classe Compte qui va désormais posséder un propriétaire. Voici le modèle UML :       
+1. Réaliser la classe Personne :  
+  - penser à définir les constructeurs et accesseurs  
+  - penser à réaliser méthode toString().  
+  - la méthode getAge() calcule l’âge en fonction de la date de naissance qui sera entrée sous la forme jj//mm/aaaa.. 
 
-2. Réaliser une classe « IhmTextCompte » (dans un autre package)  qui contient des méthodes pour la gestion d’une interface utilisateur en mode texte. Réaliser une méthode « lireSomme » qui permette de lire une somme au clavier. Utiliser cette méthode dans votre application pour récupérer les sommes à créditer et débiter sur votre compte.
+2. Compléter la classe Compte :     
+  -    intégrer la notion de propriétaire.     
+  -    lors de l’affichage d’un compte on affichera également le nom du propriétaire. 
 
-3. Nous souhaitons pouvoir afficher les opérations refusées (Debit impossible) sur un Compte dans la console en cas de litige. Réaliser une classe « Journal» qui permet de stocker les différentes opérations refusées sur l’ensemble des comptes. Le stockage des messages se fera dans une chaine par concaténation (on n’a pas encore vu l’utilisation des collections). Nous voulons garantir que notre programme va utiliser une seule et même instance de la classe Journal (pattern singleton).
+3. Mettre en place la relation entre deux personnes :      
+  -    réaliser les méthodes marier et divorcer. 
+  -    
 
-4. Concevoir un fichier .jar qui va contenir votre application.   
-
-5. Vérifier le contenu du fichier .jar et notamment si le Main-class du fichier manifest.mf est correct.  
-
-6. Lancer votre application en ligne de commande. 
-
-7. Créer une documentation pour votre application (utilisation de la javadoc).  
+4. Réaliser une petite application permettant de valider le bon fonctionnement de vos classes. 

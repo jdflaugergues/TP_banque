@@ -10,4 +10,5 @@ J'ai divisé l'année en 24 quinzaine. Pour chaque quinzaine du mois (du 1 au 15
 Le calcul se fait donc à chaque débit (et crédit dans le cas ou il n'y a pas de débit dans la quinzaine) et la valeur de l'intérêt calculée est stockée dans un tableau de taille 24 (correspondant au quinzaines de l'année) .
 
 Ci-dessous le diagramme de classe concernant la classe CompteEpargne héritant de la classe Compte : 
+
 ![alt tag](https://raw.githubusercontent.com/jdflaugergues/TP_banque/master/img/DiagrammeClasse.jpg)

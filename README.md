@@ -1,24 +1,15 @@
-## TP 05 - Les classes
+## TP 06 - Package
 
-Tp: Réalisation et utilisation d’une classe   
+1. Réaliser un package qui contiendra la classe Compte. Utiliser la classe Compte depuis votre application (classe qui contient le main devra être dans un autre package). 
 
-On veut réaliser une classe représentant un compte bancaire.
+2. Réaliser une classe « IhmTextCompte » (dans un autre package)  qui contient des méthodes pour la gestion d’une interface utilisateur en mode texte. Réaliser une méthode « lireSomme » qui permette de lire une somme au clavier. Utiliser cette méthode dans votre application pour récupérer les sommes à créditer et débiter sur votre compte.
 
-Un compte est définit à travers les caractéristiques suivantes :  
-  - un numéro (chaine)  
-  - un solde  (float)  
-  - un montant de découvert (int)   
-  
-La classe compte doit proposer un ensemble de services 
-  - débiter : consiste à retirer un montant au solde courant 
-  - créditer : consiste à rajouter un montant au solde courant 
-  - virement : consiste à transférer de l’argent d’un compte vers un autre 
-  
-Le débit d’un compte ne sera autorisé que s’il est approvisionné et en fonction du montant de découvert autorisé. 
-On devra également définir une méthode de conversion d’un compte vers le format chaine de caractère.  
+3. Nous souhaitons pouvoir afficher les opérations refusées (Debit impossible) sur un Compte dans la console en cas de litige. Réaliser une classe « Journal» qui permet de stocker les différentes opérations refusées sur l’ensemble des comptes. Le stockage des messages se fera dans une chaine par concaténation (on n’a pas encore vu l’utilisation des collections). Nous voulons garantir que notre programme va utiliser une seule et même instance de la classe Journal (pattern singleton).
 
-1 : Réaliser la classe « Compte » en UML. 
-2 : Réaliser le code de la classe « Compte » en respectant les règles de la programmation objet  
-3 : Réaliser une application permettant de valider le bon fonctionnement de votre classe. 
+4. Concevoir un fichier .jar qui va contenir votre application.   
 
+5. Vérifier le contenu du fichier .jar et notamment si le Main-class du fichier manifest.mf est correct.  
 
+6. Lancer votre application en ligne de commande. 
+
+7. Créer une documentation pour votre application (utilisation de la javadoc).  

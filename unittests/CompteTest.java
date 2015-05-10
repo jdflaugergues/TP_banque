@@ -1,24 +1,28 @@
 
 import fr.cnam.Compte.Compte;
+import fr.cnam.Personne.Personne;
 
 /**
  * Classe de test d'un compte en banque
  * @author Jonathan de Flaugergues
- * @version 1.0
+ * @version 3.0
  */
 class CompteTest extends junit.framework.TestCase{
 
     private Compte compteA;
     private Compte compteB;
-
+    private Personne johnDoe;
+    private Personne janeRoe;
     public CompteTest(String testMethodName){
         super(testMethodName);
     }
 
     public void setUp() throws Exception{
         super.setUp();
-        compteA = new Compte("001",100);
-        compteB = new Compte("002",200);
+        johnDoe = new Personne("DOE","John","john@doe.com","28/04/1985");
+        janeRoe = new Personne("ROE","Jane","jane@roe.com","01/01/1984");
+        compteA = new Compte(johnDoe,"001",100);
+        compteB = new Compte(janeRoe,"002",200);
     }
 
     public void tearDown() throws Exception{

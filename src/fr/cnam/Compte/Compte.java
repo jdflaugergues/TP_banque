@@ -1,12 +1,13 @@
 package fr.cnam.Compte;
 
 import fr.cnam.Journal.*;
+import fr.cnam.Personne.Personne;
 
 /**
  * Classe d'un compte en banque permettant d'effectuer un virement sur un autre compte,
  * un crédit ou un débit.
  * @author Jonathan de Flaugergues
- * @version 2.0
+ * @version 3.0
  */
 public class Compte {
 
@@ -14,17 +15,32 @@ public class Compte {
     private float solde;
     private int montantDecouvert;
     private Journal journal;
+    private Personne proprietaire;
+
+    /**
+     * Constructeur par défaut
+     */
+    public Compte(){}
 
     /**
      * Constructeur par initialisation du numéro de compte et du montant du découvert
      * @param numero Le numéro de compte
      * @param montantDecouvert Le montant du découvert
      */
-    public Compte(String numero, int montantDecouvert){
+    public Compte(Personne proprietaire, String numero, int montantDecouvert){
         this.numero = numero;
         this.solde = 0;
         this.montantDecouvert = montantDecouvert;
+        this.proprietaire = proprietaire;
         journal = Journal.getInstance();
+    }
+
+    /**
+     * Obtient le propriétaire du compte
+     * @return Le propriétaire
+     */
+    public Personne getProprietaire() {
+        return this.proprietaire;
     }
 
     /**
@@ -134,8 +150,13 @@ public class Compte {
      * @return Le compte sous forme d'une chaine de caractère.
      */
     public String toString(){
-        return "Numéro de compte : " + this.numero + "\n" +
-                "Solde : " + this.solde + "\n" +
-                "Découvert autorisé : " + this.montantDecouvert + "\n";
+
+        String nomProprieteraire = (this.getProprietaire() != null) ? this.getProprietaire().getNom() : "Aucun";
+
+        return "Numéro de compte : " + this.getNumero() + "\n" +
+                "Solde : " + this.getSolde() + "\n" +
+                "Découvert autorisé : " + this.getMontantDecouvert() + "\n" +
+                "Propriétaire : " + nomProprieteraire;
     }
+
 }

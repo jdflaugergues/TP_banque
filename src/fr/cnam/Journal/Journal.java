@@ -8,7 +8,7 @@ import java.util.Date;
  * refusées sur l'ensemble des comptes.
  *
  * @author Jonathan de Flaugergues
- * @version 3.0
+ * @version 4.0
  */
 public class Journal {
 

@@ -10,17 +10,17 @@ import java.util.Locale;
 /**
  * Classe d'une personne étant propriétaire d'une compte et étant marié.
  * @author Jonathan de Flaugergues
- * @version 3.0
+ * @version 4.0
  */
 public class Personne {
+
+    private static final DateFormat DATE_FORMAT_FRANCE = DateFormat.getDateInstance(DateFormat.LONG, Locale.FRANCE);
 
     private String nom;
     private String prenom;
     private String email;
     private Date dateNaissance;
     private Personne mariOuFemme;
-
-    private static DateFormat df = DateFormat.getDateInstance(DateFormat.LONG, Locale.FRANCE);
 
     /**
      * Constructeur par défaut
@@ -41,52 +41,7 @@ public class Personne {
         this.setDateNaissance(Personne.getDateFromString("dd/MM/yyyy",dateNaissance));
     }
 
-    /**
-     * Obtient une date à partir d'une chaine de caractère
-     * @param format Le format de date attendu
-     * @param stringDate La date sous forme d'une string
-     * @return La date parsée ou null si le format est invalide.
-     */
-    public static Date getDateFromString(String format, String stringDate) {
-        Date date = null;
-        try {
-            date = new SimpleDateFormat(format).parse(stringDate);
-        } catch (ParseException ex) {
-            ex.printStackTrace();
-        }
-        return date;
-    }
-
-    /**
-     * Calcule l'âge à partir de la date de naissance de la personne
-     * @return L'âge de la personne
-     */
-    public int getAge(){
-
-        Calendar birthDay = Calendar.getInstance();
-        birthDay.setTime(this.getDateNaissance());
-        Calendar today = Calendar.getInstance();
-
-        int age = today.get(Calendar.YEAR) - birthDay.get(Calendar.YEAR);
-        if (today.get(Calendar.DAY_OF_YEAR) < birthDay.get(Calendar.DAY_OF_YEAR))
-            age--;
-
-        return age;
-    }
-
-    /**
-     * Représente la personne sous forme d'une chaine de caractère.
-     * @return La personne sous forme d'une chaine de caractère.
-     */
-    public String toString(){
-
-        return  "Nom : " + this.getNom() + "\n" +
-                "Prénom : " + this.getPrenom() + "\n" +
-                "E-Mail : " + this.getEmail() + "\n" +
-                "Date de naissance : " + Personne.df.format(this.getDateNaissance()) + "\n" +
-                "Mari ou femme : " + this.getMariOuFemme();
-    }
-
+    //region getter/setter
     public String getNom() {
         return nom;
     }
@@ -137,6 +92,40 @@ public class Personne {
     public void setMariOuFemme(Personne mariOuFemme) {
         this.mariOuFemme = mariOuFemme;
     }
+    //endregion
+
+    /**
+     * Obtient une date à partir d'une chaine de caractère
+     * @param format Le format de date attendu
+     * @param stringDate La date sous forme d'une string
+     * @return La date parsée ou null si le format est invalide.
+     */
+    public static Date getDateFromString(String format, String stringDate) {
+        Date date = null;
+        try {
+            date = new SimpleDateFormat(format).parse(stringDate);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        return date;
+    }
+
+    /**
+     * Calcule l'âge à partir de la date de naissance de la personne
+     * @return L'âge de la personne
+     */
+    public int getAge(){
+
+        Calendar birthDay = Calendar.getInstance();
+        birthDay.setTime(this.getDateNaissance());
+        Calendar today = Calendar.getInstance();
+
+        int age = today.get(Calendar.YEAR) - birthDay.get(Calendar.YEAR);
+        if (today.get(Calendar.DAY_OF_YEAR) < birthDay.get(Calendar.DAY_OF_YEAR))
+            age--;
+
+        return age;
+    }
 
     /**
      * Marie la personne à une autre personne.
@@ -169,5 +158,18 @@ public class Personne {
             mariOuFemme.mariOuFemme = null;
         } else
             throw new Exception("La personne ne peut pas divorcer car elle n'est pas mariée.");
+    }
+
+    /**
+     * Représente la personne sous forme d'une chaine de caractère.
+     * @return La personne sous forme d'une chaine de caractère.
+     */
+    public String toString(){
+
+        return  "Nom : " + this.getNom() + "\n" +
+                "Prénom : " + this.getPrenom() + "\n" +
+                "E-Mail : " + this.getEmail() + "\n" +
+                "Date de naissance : " + DATE_FORMAT_FRANCE.format(this.getDateNaissance()) + "\n" +
+                "Mari ou femme : " + this.getMariOuFemme();
     }
 }

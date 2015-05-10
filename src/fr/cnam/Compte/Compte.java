@@ -3,19 +3,27 @@ package fr.cnam.Compte;
 import fr.cnam.Journal.*;
 import fr.cnam.Personne.Personne;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
+
 /**
  * Classe d'un compte en banque permettant d'effectuer un virement sur un autre compte,
  * un crédit ou un débit.
  * @author Jonathan de Flaugergues
- * @version 3.0
+ * @version 4.0
  */
 public class Compte {
+
+    private static final int MAX_OPERATION = 10;
 
     private String numero;
     private float solde;
     private int montantDecouvert;
     private Journal journal;
     private Personne proprietaire;
+    private Operation[] operations;
+    private int nbOperations = 0; // Nombre d'operations dans le tableau
 
     /**
      * Constructeur par défaut
@@ -32,8 +40,11 @@ public class Compte {
         this.solde = 0;
         this.montantDecouvert = montantDecouvert;
         this.proprietaire = proprietaire;
-        journal = Journal.getInstance();
+        this.journal = Journal.getInstance();
+        this.operations = new Operation[MAX_OPERATION];
     }
+
+    //region getter/setter
 
     /**
      * Obtient le propriétaire du compte
@@ -85,6 +96,62 @@ public class Compte {
     }
 
     /**
+     * Obtient la liste des opération
+     * @return La liste des opérations du compte
+     */
+    public Operation[] getOperations() {
+        return this.operations;
+    }
+
+    //endregion
+
+    /**
+     * Ajoute une opération dans le tableau d'opération
+     * @param operation L'opération à ajouter.
+     */
+    private void addOperation(Operation operation){
+
+        if (this.getOperations()[MAX_OPERATION-1]== null)
+            this.getOperations()[MAX_OPERATION-1] = operation;
+        else
+            this.getOperations()[0] = operation;
+
+        // On tri dans l'ordre croissant des dates après l'insertion
+        Arrays.sort(this.getOperations(), new Comparator<Operation>() {
+            @Override
+            public int compare(Operation o1, Operation o2) {
+
+                if (o1 == null && o2 == null) {
+                    return 0;
+                }
+                if (o1 == null) {
+                    return 1;
+                }
+                if (o2 == null) {
+                    return -1;
+                }
+
+                return o1.getDate().compareTo(o2.getDate());
+            }
+        });
+    }
+
+    /**
+     * Récupère les dernières opérations sous la forme d'une chaine
+     * @return Les dernières opérations
+     */
+    public String getHistorique(){
+
+        String historique = "";
+
+        for (Operation operation : this.getOperations()) {
+            if (operation != null)
+                historique += operation + "\n";
+        }
+        return historique;
+    }
+
+    /**
      * Débite le compte d'un montant.
      * @param montant Montant à débiter
      * @return Vrai si le compte est débité; faux sinon.
@@ -94,9 +161,10 @@ public class Compte {
 
         if (montant > 0) {
             if (this.solde > 0) {
-                if (this.solde - montant >= this.montantDecouvert) {
+                if (this.solde - montant >= -this.montantDecouvert) {
                     this.solde -= montant;
                     debit = true;
+                    this.addOperation(new Operation(TypeOperation.DEBIT,montant));
                 } else {
                     journal.add( this.getNumero() + " : Débit impossible car cela entrenerait un découvert non autorisé.");
                 }
@@ -120,6 +188,7 @@ public class Compte {
         if (montant > 0) {
             this.solde += montant;
             credit = true;
+            this.addOperation(new Operation(TypeOperation.CREDIT,montant));
         }else{
             journal.add(this.getNumero() + " : Le montant à créditer doit être positif.");
         }
@@ -158,5 +227,4 @@ public class Compte {
                 "Découvert autorisé : " + this.getMontantDecouvert() + "\n" +
                 "Propriétaire : " + nomProprieteraire;
     }
-
 }

@@ -1,18 +1,18 @@
 import fr.cnam.Compte.Compte;
+import fr.cnam.Compte.Operation;
+import fr.cnam.Compte.TypeOperation;
 import fr.cnam.Personne.Personne;
 
 /**
- * Classe de test d'un compte en banque
+ * Classe de test d'un compte en banque et d'une OpÃ©ration
  * @author Jonathan de Flaugergues
- * @version 3.0
+ * @version 4.0
  */
 public class MainTest extends junit.framework.TestCase{
 
     private Personne johnDoe;
-    private Personne johnnieDoe;
-    private Personne janeRoe;
-    private Personne janieDoe;
-
+    private Operation debit;
+    private Operation credit;
     private Compte compteDoe;
 
     public MainTest(String testMethodName){
@@ -22,93 +22,53 @@ public class MainTest extends junit.framework.TestCase{
     public void setUp() throws Exception{
         super.setUp();
         johnDoe = new Personne("DOE","John","john@doe.com","28/04/1985");
-        johnnieDoe = new Personne("DOE","Johnnie","johnnie@doe.com","28/04/1986");
-        janeRoe = new Personne("ROE","Jane","jane@roe.com","01/01/1984");
-        janieDoe = new Personne("DOE","Janie","janie@doe.com","01/01/1983");
         compteDoe = new Compte(johnDoe,"0001",1000);
+        debit = new Operation(TypeOperation.DEBIT,500f);
+        credit = new Operation(TypeOperation.CREDIT,200f);
     }
 
     public void tearDown() throws Exception{
         super.tearDown();
         johnDoe = null;
-        johnnieDoe = null;
-        janeRoe = null;
-        janieDoe = null;
         compteDoe = null;
     }
 
     /**
-     * Test Unitaire de la classe Compte
+     * Test Unitaire de la classe Operation
      */
-    public void testCompte(){
-        assertEquals("Compte de John Doe",johnDoe,compteDoe.getProprietaire());
+    public void testOperation(){
+        assertNotNull("L'instance est crÃ©Ã©e", debit);
+        assertNotNull("L'instance est crÃ©Ã©e", credit);
+
+        assertEquals("OpÃ©ration dÃ©bit", TypeOperation.DEBIT, debit.getType());
+        assertEquals("OpÃ©ration crÃ©dit", TypeOperation.CREDIT, credit.getType());
+        assertEquals("OpÃ©ration dÃ©bit montant", 500f, debit.getMontant());
+        assertEquals("OpÃ©ration crÃ©dit montant",200f,credit.getMontant());
+
     }
 
     /**
-     * Test Unitaire de la classe Personne
+     * Test Unitaire de la mÃ©thode getHistorique de la classe Compte.
+     * On fait un sleep aprÃ¨s chaque seconde car sinon des opÃ©rations peuvent Ãªtre traitÃ© en
+     * mÃªme temps et du coup fausser les tests.
      */
-    public void testPersonne(){
-        assertNotNull("L'instance est créée", johnDoe);
-        assertNotNull("L'instance est créée", johnnieDoe);
-        assertNotNull("L'instance est créée", janeRoe);
-        assertNotNull("L'instance est créée", janieDoe);
+    public void testGetHistorique() throws InterruptedException {
+
+        compteDoe.crediter(10);Thread.sleep(100);
+        compteDoe.crediter(20);Thread.sleep(100);
+        compteDoe.crediter(30);Thread.sleep(100);
+        compteDoe.crediter(40);Thread.sleep(100);
+        compteDoe.crediter(50);Thread.sleep(100);
+        compteDoe.debiter(1);Thread.sleep(100);
+        compteDoe.debiter(2);Thread.sleep(100);
+        compteDoe.debiter(3);Thread.sleep(100);
+        compteDoe.debiter(4);Thread.sleep(100);
+        compteDoe.debiter(5);Thread.sleep(100);
+        compteDoe.debiter(6);Thread.sleep(100);
+        compteDoe.crediter(500);Thread.sleep(100);
+
+        // On vÃ©rifie dans la console que les 2 opÃ©rations les plus anciennes ne sont plus prÃ©sente dans l'historique
+        System.out.println(compteDoe.getHistorique());
     }
-
-    /**
-     * Test Unitaire de la méthode marier de la classe Personne
-     */
-    public void testMarier(){
-
-        try {
-            johnDoe.marier(null);
-            fail("L'argument personne doit être obligatoire");
-        }catch(Exception e){}
-
-        try {
-            johnDoe.marier(janeRoe);
-            johnDoe.marier(johnDoe);
-            fail("Il ne doit pas être possible de se marier avec soi-même");
-        }catch(Exception e){}
-
-        try {
-            johnDoe.marier(janieDoe);
-            fail("Il ne doit pas être possible de se marier avec une 2ème personne");
-        }catch(Exception e){}
-
-        try {
-            janieDoe.marier(johnnieDoe);
-            johnDoe.marier(janieDoe);
-            fail("Il ne doit pas être possible de se marier avec une personne déja mariée.");
-        }catch(Exception e){}
-
-        assertEquals("John Doe est bien marié avec Jane Roe", janeRoe, johnDoe.getMariOuFemme());
-        assertEquals("Jane Roe est bien mariée avec John Doe", johnDoe, janeRoe.getMariOuFemme());
-    }
-
-    /**
-     * Test Unitaire de la méthode divorcer de la classe Personne
-     */
-    public void testDivorcer(){
-        try {
-            johnDoe.divorcer();
-            assertNull("John Doe est célibataire", johnDoe.getMariOuFemme());
-            assertNull("Jane Roe est célibataire", janeRoe.getMariOuFemme());
-
-            johnDoe.divorcer();
-            fail("John Doe ne doit pas pouvoir divorcer si il n'est pas marié.");
-        }catch(Exception e){}
-    }
-
-    /**
-     * Test unitaire de la méthode getAge de la classe Personne
-     */
-    public void testGetAge(){
-
-        assertEquals("John Doe a 30 ans",30,johnDoe.getAge());
-        assertEquals("Johnnie Doe a 29 ans",29,johnnieDoe.getAge());
-        assertEquals("Jane ROE a 31 ans",31,janeRoe.getAge());
-        assertEquals("Janie DOE a 32 ans",32,janieDoe.getAge());
-    }
-
 
 }

@@ -139,6 +139,23 @@ public class Banque {
         return compteDeleted;
     }
 
+    /**
+     * Représente la banque sous forme d'une chaine de caractère.
+     * @return La banque sous forme d'une chaine de caractère.
+     */
+    public String toString(){
+
+        String banque = "";
+
+        for (Compte currentCompte : this.listeCompte){
+            if (currentCompte == null)
+                break;
+
+            banque += currentCompte.toString() + "\n";
+        }
+        return banque;
+    }
+
     //region getter/setter
 
     public String getNom() {

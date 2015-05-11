@@ -51,7 +51,7 @@ public class CompteEpargne extends Compte{
      * Calcule les intérêts de la quinzaine en cours.
      * @return
      */
-    private void calculerInteretQuinzaine(){
+    public void calculerInteretQuinzaine(){
 
         Calendar today = Calendar.getInstance();
         int fortnight = (today.get(Calendar.MONTH)) * 2;

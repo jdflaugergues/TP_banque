@@ -131,6 +131,7 @@ public class Banque {
             if (this.listeCompte[indexCurrentCompte].getNumero().equals(numero)) {
                 this.listeCompte[indexCurrentCompte] = this.listeCompte[nbCompte-1];
                 this.listeCompte[nbCompte-1] = null;
+                nbCompte--;
                 compteDeleted = true;
                 break;
             }

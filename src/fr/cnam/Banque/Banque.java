@@ -19,15 +19,17 @@ public class Banque {
     /**
      * Constructeur par défaut
      */
-    public Banque(){}
+    public Banque(){
+        this.listeCompte = new Compte[MAX_COMPTE];
+    }
 
     /**
      * Constructeur par initialisation du nom de la banque.
      * @param nom Nom de la banque
      */
     public Banque(String nom){
+        this();
         this.setNom(nom);
-        this.listeCompte = new Compte[MAX_COMPTE];
         this.nbCompte = 0;
     }
 

@@ -1,6 +1,6 @@
 
 import fr.cnam.Compte.Compte;
-import fr.cnam.Personne.Personne;
+import fr.cnam.Proprietaire.Personne;
 
 /**
  * Classe de test d'un compte en banque

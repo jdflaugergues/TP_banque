@@ -2,7 +2,8 @@ package fr.cnam.Banque;
 
 import fr.cnam.Compte.Compte;
 import fr.cnam.Compte.CompteEpargne;
-import fr.cnam.Personne.Personne;
+import fr.cnam.Proprietaire.Personne;
+import fr.cnam.Proprietaire.Proprietaire;
 
 /**
  * @author <a href="mailto:time_has_come_260@hotmail.com">Jonathan de Flaugergues</a>
@@ -47,7 +48,7 @@ public class Banque {
      * @param montantDecouvert Montant du découvert autorisé du compte
      * @return Le compte créé; null sinon
      */
-    public Compte createCompte(Personne proprietaire, int montantDecouvert){
+    public Compte createCompte(Proprietaire proprietaire, int montantDecouvert){
 
         Compte compte = null;
 
@@ -69,7 +70,7 @@ public class Banque {
      * @param tauxInterets Taux intérêt du compte épargne.
      * @return Le compte épargne créé; null sinon
      */
-    public Compte createCompte(Personne proprietaire, int montantDecouvert,float tauxInterets){
+    public Compte createCompte(Proprietaire proprietaire, int montantDecouvert,float tauxInterets){
 
         Compte compte = null;
 

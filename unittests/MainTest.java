@@ -1,8 +1,5 @@
-import fr.cnam.Compte.Compte;
 import fr.cnam.Compte.CompteEpargne;
-import fr.cnam.Compte.Operation;
-import fr.cnam.Compte.TypeOperation;
-import fr.cnam.Personne.Personne;
+import fr.cnam.Proprietaire.Personne;
 
 import java.util.Calendar;
 

@@ -1,7 +1,7 @@
 package fr.cnam.Compte;
 
 import fr.cnam.Journal.Journal;
-import fr.cnam.Personne.Personne;
+import fr.cnam.Proprietaire.*;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -10,7 +10,7 @@ import java.util.Comparator;
  * Classe d'un compte en banque permettant d'effectuer un virement sur un autre compte,
  * un crédit ou un débit.
  * @author Jonathan de Flaugergues
- * @version 5.0
+ * @version 7.0 ${20/05/2015}
  */
 public class Compte {
 
@@ -20,7 +20,7 @@ public class Compte {
     private float solde;
     private int montantDecouvert;
     private Journal journal;
-    private Personne proprietaire;
+    private Proprietaire proprietaire;
     private Operation[] operations;
     private int nbOperations = 0; // Nombre d'operations dans le tableau
 
@@ -34,7 +34,7 @@ public class Compte {
      * @param numero Le numéro de compte
      * @param montantDecouvert Le montant du découvert
      */
-    public Compte(Personne proprietaire, String numero, int montantDecouvert){
+    public Compte(Proprietaire proprietaire, String numero, int montantDecouvert){
         this.numero = numero;
         this.solde = 1000;
         this.montantDecouvert = montantDecouvert;
@@ -49,7 +49,7 @@ public class Compte {
      * Obtient le propriétaire du compte
      * @return Le propriétaire
      */
-    public Personne getProprietaire() {
+    public Proprietaire getProprietaire() {
         return this.proprietaire;
     }
 

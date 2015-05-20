@@ -1,7 +1,7 @@
 import fr.cnam.Banque.Banque;
 import fr.cnam.Compte.Compte;
 import fr.cnam.Compte.CompteEpargne;
-import fr.cnam.Personne.Personne;
+import fr.cnam.Proprietaire.Personne;
 
 /**
  * Classe de test unitaire de la classe Compte

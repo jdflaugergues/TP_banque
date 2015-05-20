@@ -1,4 +1,4 @@
-package fr.cnam.Personne;
+package fr.cnam.Proprietaire;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -10,13 +10,12 @@ import java.util.Locale;
 /**
  * Classe d'une personne étant propriétaire d'une compte et étant marié.
  * @author Jonathan de Flaugergues
- * @version 5.0
+ * @version 7.0 ${20/05/2015}
  */
-public class Personne {
+public class Personne extends Proprietaire{
 
     private static final DateFormat DATE_FORMAT_FRANCE = DateFormat.getDateInstance(DateFormat.LONG, Locale.FRANCE);
 
-    private String nom;
     private String prenom;
     private String email;
     private Date dateNaissance;
@@ -35,23 +34,13 @@ public class Personne {
      * @param dateNaissance Date de naissance
      */
     public Personne(String nom, String prenom, String email, String dateNaissance){
-        this.setNom(nom);
+        super(nom);
         this.setPrenom(prenom);
         this.setEmail(email);
         this.setDateNaissance(Personne.getDateFromString("dd/MM/yyyy",dateNaissance));
     }
 
     //region getter/setter
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        if (nom == null)
-            throw new IllegalArgumentException("Argument nom must not br null");
-
-        this.nom = nom;
-    }
 
     public String getPrenom() {
         return prenom;
@@ -158,6 +147,22 @@ public class Personne {
             mariOuFemme.mariOuFemme = null;
         } else
             throw new Exception("La personne ne peut pas divorcer car elle n'est pas mariée.");
+    }
+
+    /**
+     * Authentifie le client à partir de son prénom et de son nom.
+     * @return Le prénom et le nom du client.
+     */
+    public String sauthentifier(){
+        return this.getPrenom() + " " + this.getNom();
+    }
+
+    /**
+     * Localise le client à partir de son adresse mail.
+     * @return L'adresse mail du client.
+     */
+    public String localiser(){
+        return this.getEmail();
     }
 
     /**

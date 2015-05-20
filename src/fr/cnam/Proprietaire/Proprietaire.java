@@ -47,4 +47,10 @@ public abstract class Proprietaire {
      */
     abstract public String localiser();
 
+    /**
+     * Représente le propriétaire sous forme d'une chaine de caractère.
+     * @return Le propriétaire sous forme d'une chaine de caractère.
+     */
+    abstract public String toString();
+
 }

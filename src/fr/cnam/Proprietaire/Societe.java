@@ -24,6 +24,18 @@ public class Societe extends Proprietaire{
         this.setAdresse(adresse);
     }
 
+    //region getter/setter
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        if (adresse == null)
+            throw new IllegalArgumentException("Argument adresse must not be null.");
+        this.adresse = adresse;
+    }
+    //endregion
+
     /**
      * Authentifie la société à partir de son nom.
      * @return Le nom de la société
@@ -40,15 +52,15 @@ public class Societe extends Proprietaire{
         return this.getAdresse();
     }
 
-    //region getter/setter
-    public String getAdresse() {
-        return adresse;
+    /**
+     * Représente la société sous forme d'une chaine de caractère.
+     * @return La société sous forme d'une chaine de caractère.
+     */
+    public String toString(){
+
+        return  "Nom : " + this.getNom() + "\n" +
+                "Prénom : " + this.getAdresse();
     }
 
-    public void setAdresse(String adresse) {
-        if (adresse == null)
-            throw new IllegalArgumentException("Argument adresse must not be null.");
-        this.adresse = adresse;
-    }
-    //endregion
+
 }

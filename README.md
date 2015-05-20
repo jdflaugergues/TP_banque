@@ -1,10 +1,14 @@
-## TP 10 - Le polymorphisme (liaison dynamique)
+## TP 11 - Classe abstraite et interface
 
-Le nombre de compte maximum de la banque a été défini à 10.
-C'est la banque qui génère le numéro de chaque compte afin de controler l'unicité à travers la méthode getNextCompteNumber.
+La classe abstraite Propriétaire représente le modèle à implémenter par les classe Société et Personne. Par conséquent, ces deux dernières classes héritent de la classe Propriétaire.
 
-Les tests concernant l'intégration de la classe banque se trouvent dans la classe JUnit : BanqueTest.
+La classe Compte n'est plus associé à une Personne mais à un Propriétaire.
+Les méthodes createCompte de la classe Banque ne prennent plus en argument le type Personne, mais Proprietaire.
 
-Diagramme de classe de l'application avec prise en compte de la classe Banque : 
+Les tests 
+
+Les tests concernant l'intégration de la classe abstraite Proprietaire et de la classe fille Societe se trouvent dans la classe JUnit : ProprietaireTest.
+
+Diagramme de classe de l'application : 
 
 ![alt tag](https://raw.githubusercontent.com/jdflaugergues/TP_banque/master/img/DiagrammeClasse.jpg)

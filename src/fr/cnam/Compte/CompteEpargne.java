@@ -1,5 +1,6 @@
 package fr.cnam.Compte;
 
+import fr.cnam.Proprietaire.IProprietaire;
 import fr.cnam.Proprietaire.Personne;
 import fr.cnam.Proprietaire.Proprietaire;
 
@@ -28,7 +29,7 @@ public class CompteEpargne extends Compte{
      * @param montantDecouvert Montant du découver autorisé
      * @param tauxInterets Taux d'intérêt du compte epargne
      */
-    public CompteEpargne(Proprietaire proprietaire, String numero, int montantDecouvert, float tauxInterets){
+    public CompteEpargne(IProprietaire proprietaire, String numero, int montantDecouvert, float tauxInterets){
         super(proprietaire,numero,montantDecouvert);
 
         this.setTauxInterets(tauxInterets);

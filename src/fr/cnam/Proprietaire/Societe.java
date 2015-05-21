@@ -5,9 +5,10 @@ package fr.cnam.Proprietaire;
  * @author <a href="mailto:time_has_come_260@hotmail.com">Jonathan de Flaugergues</a>
  * @version 7.0 ${19/05/2015}
  */
-public class Societe extends Proprietaire{
+public class Societe implements IProprietaire{
 
     private String adresse;
+    private String nom;
 
     /**
      * Constructeur par défaut
@@ -20,11 +21,23 @@ public class Societe extends Proprietaire{
      * @param adresse
      */
     public Societe(String nom, String adresse){
-        super(nom);
+        this.setNom(nom);
         this.setAdresse(adresse);
     }
 
     //region getter/setter
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        if (nom == null)
+            throw new IllegalArgumentException("Argument nom must not be null.");
+
+        this.nom = nom;
+    }
+
     public String getAdresse() {
         return adresse;
     }

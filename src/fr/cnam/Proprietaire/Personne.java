@@ -12,10 +12,11 @@ import java.util.Locale;
  * @author Jonathan de Flaugergues
  * @version 7.0 ${20/05/2015}
  */
-public class Personne extends Proprietaire{
+public class Personne implements IProprietaire{
 
     private static final DateFormat DATE_FORMAT_FRANCE = DateFormat.getDateInstance(DateFormat.LONG, Locale.FRANCE);
 
+    private String nom;
     private String prenom;
     private String email;
     private Date dateNaissance;
@@ -34,13 +35,24 @@ public class Personne extends Proprietaire{
      * @param dateNaissance Date de naissance
      */
     public Personne(String nom, String prenom, String email, String dateNaissance){
-        super(nom);
+        this.setNom(nom);
         this.setPrenom(prenom);
         this.setEmail(email);
         this.setDateNaissance(Personne.getDateFromString("dd/MM/yyyy",dateNaissance));
     }
 
     //region getter/setter
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        if (nom == null)
+            throw new IllegalArgumentException("Argument nom must not be null.");
+
+        this.nom = nom;
+    }
 
     public String getPrenom() {
         return prenom;

@@ -1,7 +1,7 @@
 package fr.cnam.Proprietaire;
 
 /**
- * Classe société possédant une adresse, héritant de la classe abstraite Proprietaire.
+ * Classe société possédant une adresse, implémentant l'interface IProprietaire
  * @author <a href="mailto:time_has_come_260@hotmail.com">Jonathan de Flaugergues</a>
  * @version 7.0 ${19/05/2015}
  */

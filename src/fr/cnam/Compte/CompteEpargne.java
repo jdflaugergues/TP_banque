@@ -1,8 +1,6 @@
 package fr.cnam.Compte;
 
 import fr.cnam.Proprietaire.IProprietaire;
-import fr.cnam.Proprietaire.Personne;
-import fr.cnam.Proprietaire.Proprietaire;
 
 import java.text.DateFormatSymbols;
 import java.util.Calendar;

@@ -3,7 +3,6 @@ package fr.cnam.Banque;
 import fr.cnam.Compte.Compte;
 import fr.cnam.Compte.CompteEpargne;
 import fr.cnam.Proprietaire.IProprietaire;
-import fr.cnam.Proprietaire.Proprietaire;
 
 /**
  * @author <a href="mailto:time_has_come_260@hotmail.com">Jonathan de Flaugergues</a>

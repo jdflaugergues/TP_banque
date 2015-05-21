@@ -1,5 +1,7 @@
 package fr.cnam.Compte;
 
+import fr.cnam.Proprietaire.IProprietaire;
+
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
 

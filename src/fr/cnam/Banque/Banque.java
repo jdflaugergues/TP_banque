@@ -4,23 +4,24 @@ import fr.cnam.Compte.Compte;
 import fr.cnam.Compte.CompteEpargne;
 import fr.cnam.Proprietaire.IProprietaire;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author <a href="mailto:time_has_come_260@hotmail.com">Jonathan de Flaugergues</a>
- * @version 6.0 ${11/05/2015}
+ * @version 8.0 ${01/06/2015}
  */
 public class Banque {
 
-    private static final int MAX_COMPTE = 10;
-
     private String nom;
-    private Compte[] listeCompte;
+    private Map<String,Compte> listeCompte;
     private int nbCompte;
 
     /**
      * Constructeur par défaut
      */
     public Banque(){
-        this.listeCompte = new Compte[MAX_COMPTE];
+        this.listeCompte = new HashMap<>();
     }
 
     /**
@@ -51,14 +52,11 @@ public class Banque {
 
         Compte compte = null;
 
-        if (this.nbCompte >= MAX_COMPTE) {
-            System.out.println("Impossible de créer un compte supplémentaire, la limite fixée à " + this.MAX_COMPTE + "est atteinte.");
-        }else{
-            String numero = getNextCompteNumber();
-            compte = new Compte(proprietaire,numero,montantDecouvert);
-            this.listeCompte[this.nbCompte] = compte;
-            this.nbCompte++;
-        }
+        String numero = getNextCompteNumber();
+        compte = new Compte(proprietaire,numero,montantDecouvert);
+        this.listeCompte.put(numero,compte);
+        this.nbCompte++;
+
         return compte;
     }
 
@@ -73,14 +71,11 @@ public class Banque {
 
         Compte compte = null;
 
-        if (this.nbCompte >= MAX_COMPTE) {
-            System.out.println("Impossible de créer un compte supplémentaire, la limite fixée à " + this.MAX_COMPTE + "est atteinte.");
-        }else{
-            String numero = getNextCompteNumber();
-            compte = new CompteEpargne(proprietaire,numero,montantDecouvert,tauxInterets);
-            this.listeCompte[this.nbCompte] = compte;
-            this.nbCompte++;
-        }
+        String numero = getNextCompteNumber();
+        compte = new CompteEpargne(proprietaire,numero,montantDecouvert,tauxInterets);
+        this.listeCompte.put(numero,compte);
+        this.nbCompte++;
+
         return compte;
     }
 
@@ -90,31 +85,16 @@ public class Banque {
      * @return Le compte trouvé; null sinon
      */
     public Compte searchCompte(String numero){
-        Compte compte = null;
-
-        for (Compte currentCompte : this.listeCompte){
-            if (currentCompte == null)
-                break;
-
-            if (currentCompte.getNumero().equals(numero)) {
-                compte = currentCompte;
-                break;
-            }
-        }
-        return compte;
+        return this.listeCompte.get(numero);
     }
 
     /**
      * Met a jour les intérêts des comptes Epargne
      */
     public void updateInterest(){
-        for (Compte currentCompte : this.listeCompte){
-            if (currentCompte == null)
-                break;
-
-            if (currentCompte instanceof CompteEpargne) {
-                ((CompteEpargne)currentCompte).calculerInteretQuinzaine();
-                break;
+        for(Map.Entry<String, Compte> currentCompte : this.listeCompte.entrySet()){
+            if (currentCompte.getValue() instanceof CompteEpargne) {
+                ((CompteEpargne) currentCompte.getValue()).calculerInteretQuinzaine();
             }
         }
     }
@@ -128,18 +108,9 @@ public class Banque {
 
         boolean compteDeleted = false;
 
-        for (int indexCurrentCompte = 0;indexCurrentCompte < this.nbCompte;indexCurrentCompte++){
+        Compte compteRemoved = this.listeCompte.remove(numero);
 
-            if (this.listeCompte[indexCurrentCompte].getNumero().equals(numero)) {
-                this.listeCompte[indexCurrentCompte] = this.listeCompte[nbCompte-1];
-                this.listeCompte[nbCompte-1] = null;
-                nbCompte--;
-                compteDeleted = true;
-                break;
-            }
-        }
-
-        return compteDeleted;
+        return compteRemoved != null;
     }
 
     /**
@@ -150,12 +121,10 @@ public class Banque {
 
         String banque = "";
 
-        for (Compte currentCompte : this.listeCompte){
-            if (currentCompte == null)
-                break;
-
+        for(Map.Entry<String, Compte> currentCompte : this.listeCompte.entrySet()){
             banque += currentCompte.toString() + "\n";
         }
+
         return banque;
     }
 

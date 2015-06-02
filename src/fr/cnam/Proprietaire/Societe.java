@@ -1,11 +1,11 @@
 package fr.cnam.Proprietaire;
 
 /**
- * Classe société possédant une adresse, implémentant l'interface IProprietaire
+ * Classe société possédant une adresse, implémentant l'interface ProprietaireI
  * @author <a href="mailto:time_has_come_260@hotmail.com">Jonathan de Flaugergues</a>
  * @version 7.0 ${19/05/2015}
  */
-public class Societe implements IProprietaire{
+public class Societe implements ProprietaireI{
 
     private String adresse;
     private String nom;

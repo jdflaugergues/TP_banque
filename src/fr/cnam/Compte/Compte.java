@@ -17,7 +17,7 @@ public class Compte {
     private float solde;
     private int montantDecouvert;
     private Journal journal;
-    private IProprietaire proprietaire;
+    private ProprietaireI proprietaire;
     private List<Operation> operations;
     private int nbOperations = 0; // Nombre d'operations dans le tableau
 
@@ -31,7 +31,7 @@ public class Compte {
      * @param numero Le numéro de compte
      * @param montantDecouvert Le montant du découvert
      */
-    public Compte(IProprietaire proprietaire, String numero, int montantDecouvert){
+    public Compte(ProprietaireI proprietaire, String numero, int montantDecouvert){
         this.numero = numero;
         this.solde = 1000;
         this.montantDecouvert = montantDecouvert;
@@ -46,7 +46,7 @@ public class Compte {
      * Obtient le propriétaire du compte
      * @return Le propriétaire
      */
-    public IProprietaire getProprietaire() {
+    public ProprietaireI getProprietaire() {
         return this.proprietaire;
     }
 

@@ -12,7 +12,7 @@ import java.util.Locale;
  * @author Jonathan de Flaugergues
  * @version 7.0 ${20/05/2015}
  */
-public class Personne implements IProprietaire{
+public class Personne implements ProprietaireI{
 
     private static final DateFormat DATE_FORMAT_FRANCE = DateFormat.getDateInstance(DateFormat.LONG, Locale.FRANCE);
 

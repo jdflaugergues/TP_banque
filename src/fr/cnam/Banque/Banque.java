@@ -2,7 +2,7 @@ package fr.cnam.Banque;
 
 import fr.cnam.Compte.Compte;
 import fr.cnam.Compte.CompteEpargne;
-import fr.cnam.Proprietaire.IProprietaire;
+import fr.cnam.Proprietaire.ProprietaireI;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,7 +48,7 @@ public class Banque {
      * @param montantDecouvert Montant du découvert autorisé du compte
      * @return Le compte créé; null sinon
      */
-    public Compte createCompte(IProprietaire proprietaire, int montantDecouvert){
+    public Compte createCompte(ProprietaireI proprietaire, int montantDecouvert){
 
         Compte compte = null;
 
@@ -67,7 +67,7 @@ public class Banque {
      * @param tauxInterets Taux intérêt du compte épargne.
      * @return Le compte épargne créé; null sinon
      */
-    public Compte createCompte(IProprietaire proprietaire, int montantDecouvert,float tauxInterets){
+    public Compte createCompte(ProprietaireI proprietaire, int montantDecouvert,float tauxInterets){
 
         Compte compte = null;
 

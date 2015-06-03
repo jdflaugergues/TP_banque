@@ -1,5 +1,6 @@
 
 import fr.cnam.Compte.Compte;
+import fr.cnam.Exception.DebitException;
 import fr.cnam.Proprietaire.Personne;
 
 import java.util.regex.Matcher;
@@ -54,14 +55,38 @@ public class CompteTest extends junit.framework.TestCase{
         assertEquals("Test du découvert",200,compteB.getMontantDecouvert());
     }
 
-    public void testDebiter()throws Exception{
-        assertFalse("Débit montant négatif",compteA.debiter(-100));
-        assertTrue("Débit autorisé", compteA.debiter(1000));
-        assertFalse("Débit compte non approvisionné",compteA.debiter(100));
+    public void testDebiter(){
+
+        try {
+            compteA.debiter(-100);
+            fail("Débit montant négatif");
+        } catch (DebitException e) {}
+
+        try {
+            compteA.debiter(1000);
+        } catch (DebitException e) {
+            fail("Débit autorisé");
+        }
+
+        try {
+            compteA.debiter(100);
+            fail("Débit compte non approvisionné");
+        } catch (DebitException e) {}
+
         compteA.crediter(500);
-        assertFalse("Découvert dépassé",compteA.debiter(700));
-        assertTrue("Débit autorisé", compteA.debiter(200));
-        assertEquals("Solde après débit",300f,compteA.getSolde());
+
+        try {
+            compteA.debiter(700);
+            fail("Découvert dépassé");
+        } catch (DebitException e) {}
+
+        try {
+            compteA.debiter(200);
+        } catch (DebitException e) {
+            fail("Débit autorisé");
+        }
+
+        assertEquals("Solde après débit", 300f, compteA.getSolde());
     }
 
     public void testCrediter()throws Exception{
@@ -72,7 +97,12 @@ public class CompteTest extends junit.framework.TestCase{
     }
 
     public void testVirement()throws Exception{
-        assertTrue("Débit autorisé",compteA.debiter(1000));
+        try {
+            compteA.debiter(1000);
+        } catch (DebitException e) {
+            fail("Débit autorisé");
+        }
+
         assertFalse("Virement avec solde nulle",compteA.virement(100f,compteB));
         assertFalse("Virement avec montant négatif",compteA.virement(-100f,compteB));
         compteA.crediter(500);
@@ -81,7 +111,7 @@ public class CompteTest extends junit.framework.TestCase{
         assertEquals("Solde Compte B après Virement",1200f,compteB.getSolde());
     }
 
-    public void testGetHistorique() throws InterruptedException {
+    public void testGetHistorique() throws InterruptedException,DebitException {
         compteA.crediter(4000);
         Thread.sleep(100);  // Sleep pour ne pas avoir une date identique entre 2 opérations
         compteA.debiter(1000);

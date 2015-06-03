@@ -4,15 +4,15 @@ package fr.cnam.Proprietaire;
  * Interface d'un Propriétaire
  *
  * @author Jonathan de Flaugergues
- * @version 7.0 ${21/05/2015}
+ * @version 9.0 ${03/06/2015}
  */
 public interface ProprietaireI {
 
     /**
-     * Permet d'authentifier le propriétaire.
-     * @return L'authentification du propriétaire
+     * Récupère l'identifiant du propriétaire.
+     * @return L'identifiant du propriétaire
      */
-    String sauthentifier();
+    <T extends Object> T getIdentifiant();
 
     /**
      * Permet de localiser le propriétaire pour le contacter.

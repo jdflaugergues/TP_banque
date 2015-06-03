@@ -1,5 +1,6 @@
 package fr.cnam.Compte;
 
+import fr.cnam.Exception.DebitException;
 import fr.cnam.Proprietaire.ProprietaireI;
 
 import java.text.DateFormatSymbols;
@@ -71,13 +72,9 @@ public class CompteEpargne extends Compte{
      * @return
      */
     @Override
-    public boolean debiter(float montant){
-        boolean debit = super.debiter(montant);
-
-        if (debit)
-            this.calculerInteretQuinzaine();
-
-        return debit;
+    public void debiter(float montant) throws DebitException {
+        super.debiter(montant);
+        this.calculerInteretQuinzaine();
     }
 
     /**

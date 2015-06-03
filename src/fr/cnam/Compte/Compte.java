@@ -1,5 +1,6 @@
 package fr.cnam.Compte;
 
+import fr.cnam.Exception.DebitException;
 import fr.cnam.Journal.Journal;
 import fr.cnam.Proprietaire.*;
 
@@ -153,25 +154,19 @@ public class Compte {
      * @param montant Montant à débiter
      * @return Vrai si le compte est débité; faux sinon.
      */
-    public boolean debiter(float montant){
-        boolean debit = false;
+    public void debiter(float montant) throws DebitException {
 
-        if (montant > 0) {
-            if (this.solde > 0) {
-                if (this.solde - montant >= -this.montantDecouvert) {
-                    this.solde -= montant;
-                    debit = true;
-                    this.operations.add(new Operation(TypeOperation.DEBIT, montant));
-                } else {
-                    journal.add( this.getNumero() + " : Débit impossible car cela entrenerait un découvert non autorisé.");
-                }
-            }else{
-                journal.add( this.getNumero() + " : Le compte doit être approvisionné.");
-            }
-        }else{
-            journal.add( this.getNumero() + " : Le montant à débiter doit être supérieur à 0.");
-        }
-        return debit;
+        if (montant <= 0)
+            throw new DebitException("Le montant à débiter doit être supérieur à 0.");
+
+        if (this.solde <= 0)
+            throw new DebitException("Le compte doit être approvisionné.");
+
+        if (this.solde - montant < -this.montantDecouvert)
+            throw new DebitException("Débit impossible car cela entrenerait un découvert non autorisé.");
+
+        this.solde -= montant;
+        this.operations.add(new Operation(TypeOperation.DEBIT, montant));
     }
 
     /**
@@ -202,12 +197,14 @@ public class Compte {
 
         boolean virer = false;
 
-        if (this.debiter(montant)){
+        try{
+            this.debiter(montant);
             virer = compte.crediter(montant);
 
-        }else{
-            journal.add(this.getNumero() + " : Virement impossible.");
+        }catch(DebitException ex){
+            journal.add(this.getNumero() + " : Virement impossible - " + ex.getMessage());
         }
+
         return virer;
     }
 

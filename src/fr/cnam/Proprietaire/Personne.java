@@ -165,7 +165,7 @@ public class Personne implements ProprietaireI{
      * Authentifie le client à partir de son prénom et de son nom.
      * @return Le prénom et le nom du client.
      */
-    public String sauthentifier(){
+    public String getIdentifiant(){
         return this.getPrenom() + " " + this.getNom();
     }
 

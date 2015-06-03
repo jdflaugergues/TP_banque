@@ -58,5 +58,10 @@ public class ProprietaireTest extends junit.framework.TestCase{
         assertEquals("Compte Coservit",compteCoservit.getProprietaire(),coservit);
     }
 
+    public void testGetIdentifiant(){
+       assertEquals("Identifiant Personne ","John DOE",johnDoe.getIdentifiant());
+       assertEquals("Identifiant Société ","Coservit",coservit.getIdentifiant());
+    }
+
 }
 

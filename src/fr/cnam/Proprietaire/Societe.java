@@ -53,7 +53,7 @@ public class Societe implements ProprietaireI{
      * Authentifie la société à partir de son nom.
      * @return Le nom de la société
      */
-    public String sauthentifier(){
+    public String getIdentifiant(){
         return this.getNom();
     }
 

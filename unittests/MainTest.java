@@ -1,4 +1,5 @@
 import fr.cnam.Compte.CompteEpargne;
+import fr.cnam.Exception.DebitException;
 import fr.cnam.Proprietaire.Personne;
 
 import java.util.Calendar;
@@ -41,7 +42,7 @@ public class MainTest extends junit.framework.TestCase{
     /**
      * Test Unitaire du calcul des interets d'une quinzaine.
      */
-    public void testInteret(){
+    public void testInteret() throws DebitException {
 
         compteDoe.crediter(500);
         assertEquals("Les intérêts de la quinzaine courante n'ont pas augmenté", 0.625f, compteDoe.getInterets()[getIndexFortNight()]);

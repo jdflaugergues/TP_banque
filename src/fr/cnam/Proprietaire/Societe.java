@@ -1,7 +1,7 @@
 package fr.cnam.Proprietaire;
 
 /**
- * Classe société possédant une adresse, implémentant l'interface ProprietaireI
+ * Classe sociÃ©tÃ© possÃ©dant une adresse, implÃ©mentant l'interface ProprietaireI
  * @author <a href="mailto:time_has_come_260@hotmail.com">Jonathan de Flaugergues</a>
  * @version 7.0 ${19/05/2015}
  */
@@ -11,12 +11,12 @@ public class Societe implements ProprietaireI{
     private String nom;
 
     /**
-     * Constructeur par défaut
+     * Constructeur par dÃ©faut
      */
     public Societe(){}
 
     /**
-     * Constructeur par initialisation du nom de la société et de son adresse
+     * Constructeur par initialisation du nom de la sociÃ©tÃ© et de son adresse
      * @param nom
      * @param adresse
      */
@@ -50,29 +50,29 @@ public class Societe implements ProprietaireI{
     //endregion
 
     /**
-     * Authentifie la société à partir de son nom.
-     * @return Le nom de la société
+     * Authentifie la sociÃ©tÃ© Ã  partir de son nom.
+     * @return Le nom de la sociÃ©tÃ©
      */
     public String getIdentifiant(){
         return this.getNom();
     }
 
     /**
-     * Localise la société à partir de son adresse.
-     * @return L'adresse de la société.
+     * Localise la sociÃ©tÃ© Ã  partir de son adresse.
+     * @return L'adresse de la sociÃ©tÃ©.
      */
-    public String localiser(){
+    public String getContact(){
         return this.getAdresse();
     }
 
     /**
-     * Représente la société sous forme d'une chaine de caractère.
-     * @return La société sous forme d'une chaine de caractère.
+     * ReprÃ©sente la sociÃ©tÃ© sous forme d'une chaine de caractÃ¨re.
+     * @return La sociÃ©tÃ© sous forme d'une chaine de caractÃ¨re.
      */
     public String toString(){
 
         return  "Nom : " + this.getNom() + "\n" +
-                "Prénom : " + this.getAdresse();
+                "Adresse : " + this.getAdresse();
     }
 
 

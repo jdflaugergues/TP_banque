@@ -39,7 +39,7 @@ public class ProprietaireTest extends junit.framework.TestCase{
         assertEquals("Nom de la societe","Coservit",coservit.getNom());
 
         assertEquals("Adresse de la société","13, rue des Trembles - 38100 GRENOBLE",coservit.getAdresse());
-        assertEquals("Localisation de la société","13, rue des Trembles - 38100 GRENOBLE",coservit.localiser());
+        assertEquals("Localisation de la société","13, rue des Trembles - 38100 GRENOBLE",coservit.getContact());
     }
 
     public void testPersonne(){
@@ -47,7 +47,7 @@ public class ProprietaireTest extends junit.framework.TestCase{
         assertEquals("Nom de la societe","Coservit",coservit.getNom());
 
         assertEquals("Adresse de la société","13, rue des Trembles - 38100 GRENOBLE",coservit.getAdresse());
-        assertEquals("Localisation de la société","13, rue des Trembles - 38100 GRENOBLE",coservit.localiser());
+        assertEquals("Localisation de la société","13, rue des Trembles - 38100 GRENOBLE",coservit.getContact());
     }
 
     public void testCompte(){

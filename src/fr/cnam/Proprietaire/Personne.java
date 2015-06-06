@@ -173,7 +173,7 @@ public class Personne implements ProprietaireI{
      * Localise le client à partir de son adresse mail.
      * @return L'adresse mail du client.
      */
-    public String localiser(){
+    public String getContact(){
         return this.getEmail();
     }
 

@@ -18,7 +18,7 @@ public interface ProprietaireI {
      * Permet de localiser le propriétaire pour le contacter.
      * @return La localisation du propriétaire.
      */
-    String localiser();
+    <T extends Object> T getContact();
 
     /**
      * Représente le propriétaire sous forme d'une chaine de caractère.

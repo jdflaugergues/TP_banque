@@ -1,5 +1,6 @@
 package fr.cnam.Compte;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,7 +13,7 @@ import java.util.Locale;
  * @author Jonathan de Flaugergues
  * @version 5.0
  */
-public class Operation {
+public class Operation implements Serializable {
 
     private static final DateFormat DATE_FORMAT_FRANCE = DateFormat.getDateInstance(DateFormat.FULL, Locale.FRANCE);
     private static final SimpleDateFormat SIMPLE_DATE_FORMAT_FRANCE = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss.SSS");

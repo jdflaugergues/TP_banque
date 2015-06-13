@@ -1,11 +1,13 @@
 package fr.cnam.Proprietaire;
 
+import java.io.Serializable;
+
 /**
  * Classe société possédant une adresse, implémentant l'interface ProprietaireI
  * @author <a href="mailto:time_has_come_260@hotmail.com">Jonathan de Flaugergues</a>
  * @version 7.0 ${19/05/2015}
  */
-public class Societe implements ProprietaireI{
+public class Societe implements ProprietaireI, Serializable {
 
     private String adresse;
     private String nom;

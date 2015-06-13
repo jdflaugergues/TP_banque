@@ -1,12 +1,10 @@
-## TP 13 - Les Exceptions
+## TP 14 - Les entrées-sorties
 
 
-La méthode débiter de la classe Compte génère une exception de type DebitException si le débit n'est pas autorisé. La méthode ne retourne donc plus un booléen pour indiquer si l'opération s'est bien effectuer.
-La méthode virement de la classe Compte capture cette exception si elle est levée durant l'exécution de la méthode débiter, et le cas échéant, stocke l'erreur dans le journal.
-La méthode de test testGetHistorique de la classe CompteTest effectue les tests de ces exceptions.
+La méthode sauvegarder de la classe Banque permet de sérialiser les comptes de la banque 
+La méthode restituerComptes de la classe Banque permet de désérialiser les comptes de la banque.
 
-L'interface ProprietaireI possède un type générique sur sa méthode getIdentifiant ce qui permet aux classes l'implémentant de retourner n'importe quel type (non primaire) sur l'implémentation de cette fonction.
-La méthode de test testGetIdentifiant de la classe ProprietaireTest teste ce type générique.
+La classe de test Junit BanqueTest regroupe les tests de sérialisation dans la méthode testSerialisationComptes.
 
 ###Diagramme de classe de l'application : 
 

@@ -4,6 +4,7 @@ import fr.cnam.Exception.DebitException;
 import fr.cnam.Journal.Journal;
 import fr.cnam.Proprietaire.*;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -12,7 +13,7 @@ import java.util.*;
  * @author Jonathan de Flaugergues
  * @version 8.0 ${01/06/2015}
  */
-public class Compte {
+public class Compte implements Serializable {
 
     private String numero;
     private float solde;

@@ -1,5 +1,6 @@
 package fr.cnam.Proprietaire;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,7 +13,7 @@ import java.util.Locale;
  * @author Jonathan de Flaugergues
  * @version 7.0 ${20/05/2015}
  */
-public class Personne implements ProprietaireI{
+public class Personne implements ProprietaireI, Serializable {
 
     private static final DateFormat DATE_FORMAT_FRANCE = DateFormat.getDateInstance(DateFormat.LONG, Locale.FRANCE);
 

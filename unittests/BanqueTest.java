@@ -96,4 +96,22 @@ public class BanqueTest extends junit.framework.TestCase{
         assertNull("Compte introuvable", compteSearched);
 
     }
+
+    public void testSerialisationComptes(){
+        Compte compte = banque.createCompte(johnDoe,100);
+        Compte compteEpargne = banque.createCompte(janeRoe,200,1.5f);
+        banque.sauvegarderComptes();
+
+        banque.deleteCompte(compte.getNumero());
+        banque.deleteCompte(compteEpargne.getNumero());
+
+        assertNull("Compte supprimés",banque.searchCompte(compte.getNumero()));
+        assertNull("Compte supprimés",banque.searchCompte(compteEpargne.getNumero()));
+
+        banque.restituerComptes();
+
+        assertEquals("Compte restitué ",compte.getProprietaire().getIdentifiant(),banque.searchCompte(compte.getNumero()).getProprietaire().getIdentifiant());
+        assertEquals("Compte restitué ", compteEpargne.getProprietaire().getIdentifiant(), banque.searchCompte(compteEpargne.getNumero()).getProprietaire().getIdentifiant());
+
+    }
 }

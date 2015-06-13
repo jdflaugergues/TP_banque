@@ -3,6 +3,7 @@ package fr.cnam.Compte;
 import fr.cnam.Exception.DebitException;
 import fr.cnam.Proprietaire.ProprietaireI;
 
+import java.io.Serializable;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
 
@@ -10,7 +11,7 @@ import java.util.Calendar;
  * @author <a href="mailto:time_has_come_260@hotmail.com">Jonathan de Flaugergues</a>
  * @version 7.0 ${20/05/2015}
  */
-public class CompteEpargne extends Compte{
+public class CompteEpargne extends Compte implements Serializable {
 
     private float tauxInterets; // Taux d'intérêt du compte épargne
     private float[] interets;   // Tableau des intérêts

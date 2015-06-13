@@ -1,12 +1,14 @@
 package fr.cnam.Compte;
 
+import java.io.Serializable;
+
 /**
  * Enumérateur de type d'opération bancaire.
  *
  * @author Jonathan de Flaugergues
  * @version 5.0
  */
-public enum TypeOperation {
+public enum TypeOperation implements Serializable {
     CREDIT ("Crédit"),
     DEBIT ("Débit");
 

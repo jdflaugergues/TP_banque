@@ -1,5 +1,6 @@
 package fr.cnam.Journal;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -9,7 +10,7 @@ import java.util.Date;
  *
  * @author Jonathan de Flaugergues
  */
-public class Journal {
+public class Journal implements Serializable {
 
     private static Journal _instance = null;
     private String journal;
